@@ -1,29 +1,20 @@
 package com.empresaseguros;
 
 
+import com.empresaseguros.model.Cliente;
+import com.empresaseguros.model.Propiedad;
 import com.empresaseguros.utils.Conexion;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
 
-        Connection conexion = Conexion.getConnection();
+        Propiedad prop1 = new Propiedad("Asia 540",70,22550000,"Villa Rafaela");
 
-        if (conexion != null){
-            System.out.println("Se ha hecho la conexion con exito");
-
-            try{
-                conexion.close();
-                System.out.println("Se cerro la conexion");
-            } catch (SQLException e) {
-                System.out.println("Error: " + e.getMessage());
-            }
-
-        }
-
-
+        System.out.println(prop1.toString());
 
     }
 }
