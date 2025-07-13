@@ -20,6 +20,18 @@ public class Servicio {
         this.precio = precio;
     }
 
+    //Constructor para extraer y armar el objeto con su PK respectiva
+
+
+    public Servicio(int numero_cliente, int codigo_propiedad, int codigo, String tipo, String detalle_cobertura, double precio) {
+        this.numero_cliente = numero_cliente;
+        this.codigo_propiedad = codigo_propiedad;
+        this.codigo = codigo;
+        this.tipo = tipo;
+        this.detalle_cobertura = detalle_cobertura;
+        this.precio = precio;
+    }
+
     //Constructor vacio
     public Servicio(){};
 
