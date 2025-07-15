@@ -3,8 +3,10 @@ package com.empresaseguros;
 
 import com.empresaseguros.data.ClienteDAO;
 import com.empresaseguros.data.PropiedadDAO;
+import com.empresaseguros.data.ServicioDAO;
 import com.empresaseguros.model.Cliente;
 import com.empresaseguros.model.Propiedad;
+import com.empresaseguros.model.Servicio;
 import com.empresaseguros.utils.Conexion;
 
 import java.sql.Connection;
@@ -14,17 +16,19 @@ import java.time.LocalDate;
 public class Main {
     public static void main(String[] args) {
 
-    Propiedad casa1 = new Propiedad("Belgica 2123",90,35000000,"Villa Celestina");
+    ServicioDAO serviciobd = new ServicioDAO();
+    Servicio nuevoServicio = new Servicio(6,2,"Cobertura contra accidentes","Para vehiculos",250000);
 
-    PropiedadDAO propiedadConexion = new PropiedadDAO();
 
-    boolean exito = propiedadConexion.insertarPropiedad(casa1);
+
+       boolean exito = serviciobd.insertarServicio(nuevoServicio);
 
     if (exito){
-        System.out.println("Se logro insertar la propiedad correctamente");
+        System.out.println("Se inserto el servicio correctamente");
     } else {
-        System.out.println("Hubo un error.");
+        System.out.println("El servicio no pudo ser insertado, verifique cliente y propiedad.");
     }
+
 
     }
 }

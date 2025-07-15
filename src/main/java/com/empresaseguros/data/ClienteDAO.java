@@ -5,6 +5,7 @@ import com.empresaseguros.utils.Conexion;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ClienteDAO {
@@ -12,8 +13,7 @@ public class ClienteDAO {
 
 
     //Metodo para crear un cliente e insertarlo.
-
-public boolean insertarCliente(Cliente cliente){
+    public boolean insertarCliente(Cliente cliente){
 
     String sql = "INSERT INTO clientes (nombre, apellido, dni, fecha_nacimiento, sueldo) VALUES (?,?,?,?,?)";
 
@@ -33,8 +33,28 @@ public boolean insertarCliente(Cliente cliente){
         System.out.println("Hubo un error, detalles: " + e.getMessage());
         return false;
     }
-
-
 }
+
+
+    //Metodo para verificar si un cliente existe atraves del ID del cliente
+
+    public boolean verificarCliente (int idCliente) {
+
+        String sql = "SELECT 1 FROM clientes WHERE numero_cliente = ?";
+
+        try (Connection conexion = Conexion.getConnection();
+             PreparedStatement ps = conexion.prepareStatement(sql)) {
+
+            ps.setInt(1, idCliente);
+            ResultSet rs = ps.executeQuery();
+
+            return rs.next();
+
+        } catch (SQLException e){
+            System.out.println("Error al verificar la existencia del cliente, detalles: " + e.getMessage());
+            return false;
+        }
+
+    }
 
 }
