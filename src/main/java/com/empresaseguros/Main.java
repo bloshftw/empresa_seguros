@@ -2,6 +2,7 @@ package com.empresaseguros;
 
 
 import com.empresaseguros.data.ClienteDAO;
+import com.empresaseguros.data.PropiedadDAO;
 import com.empresaseguros.model.Cliente;
 import com.empresaseguros.model.Propiedad;
 import com.empresaseguros.utils.Conexion;
@@ -13,17 +14,17 @@ import java.time.LocalDate;
 public class Main {
     public static void main(String[] args) {
 
-    Cliente cliente1 = new Cliente("Ramona","Barzola","24261506",LocalDate.parse("1978-10-30"),1195000);
+    Propiedad casa1 = new Propiedad("Belgica 2123",90,35000000,"Villa Celestina");
 
-    ClienteDAO clienteConexion = new ClienteDAO();
+    PropiedadDAO propiedadConexion = new PropiedadDAO();
 
-    boolean exito = clienteConexion.insertarCliente(cliente1);
+    boolean exito = propiedadConexion.insertarPropiedad(casa1);
 
-        if(exito){
-            System.out.println("Insercion exitosa!");
-        } else {
-            System.out.println("Hubo un error.");
-        }
+    if (exito){
+        System.out.println("Se logro insertar la propiedad correctamente");
+    } else {
+        System.out.println("Hubo un error.");
+    }
 
     }
 }
