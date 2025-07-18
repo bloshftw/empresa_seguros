@@ -4,6 +4,7 @@ import java.text.DecimalFormat;
 
 public class Propiedad {
 
+    private int codigoPropiedad;
     private String direccion;
     private double metros_cuadrados;
     private double valor_mercado;
@@ -17,8 +18,28 @@ public class Propiedad {
         this.zona = zona;
     };
 
+    //Constructor con ID
+
+
+    public Propiedad(int codigoPropiedad, String direccion, double metros_cuadrados, double valor_mercado, String zona) {
+        this.codigoPropiedad = codigoPropiedad;
+        this.direccion = direccion;
+        this.metros_cuadrados = metros_cuadrados;
+        this.valor_mercado = valor_mercado;
+        this.zona = zona;
+    }
+
     //Constructor vacio
     public Propiedad(){};
+
+    //Constructor para mostrar en conjunto con servicios
+
+    public Propiedad(int codigoPropiedad, String direccion, String zona, double precioMercado) {
+    this.codigoPropiedad = codigoPropiedad;
+    this.direccion = direccion;
+    this.zona = zona;
+    this.valor_mercado = precioMercado;
+    }
 
     //Getters and setters
 
@@ -60,7 +81,8 @@ public class Propiedad {
 
         DecimalFormat formato = new DecimalFormat("#,###.00");
 
-        return "Direccion de la propiedad: " + this.direccion + "\n" +
+        return  "Codigo: " + this.codigoPropiedad + "\n" +
+                "Direccion de la propiedad: " + this.direccion + "\n" +
                "Zona de la propiedad: " + this.zona + "\n" +
                "Metros cuadrados: " + this.metros_cuadrados + "\n" +
                "Valor en mercado: " + " $" + formato.format(this.valor_mercado) + "\n";

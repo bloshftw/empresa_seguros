@@ -85,4 +85,18 @@ public class Servicio {
     public void setPrecio(double precio) {
         this.precio = precio;
     }
+
+    public String toString(){
+
+        return "Codigo de servicio: " + this.codigo + "\n" +
+               "Tipo de cobertura: " + this.tipo + "\n" +
+               "Detalle: " + this.detalle_cobertura + "\n" +
+               "Precio: " + this.precio + "\n" +
+               "-------------------------------------";
+
+    }
+
 }
+
+
+

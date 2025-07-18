@@ -1,11 +1,16 @@
 package com.empresaseguros.data;
 
+import com.empresaseguros.model.Cliente;
+import com.empresaseguros.model.Propiedad;
 import com.empresaseguros.model.Servicio;
 import com.empresaseguros.utils.Conexion;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ServicioDAO {
 
@@ -52,6 +57,43 @@ public class ServicioDAO {
             System.out.println("No se encontraron datos del cliente ni de la propiedad en la base de datos.");
         }
         return false;
+    }
+
+
+    //Funcion para mostrar todos los servicios
+
+
+    public List<Servicio> obtenerCoberturas() {
+
+        List<Servicio> listaDeCoberturas = new ArrayList<>();
+
+        String sql = "SELECT * FROM servicios";
+
+        try(Connection conexion = Conexion.getConnection();
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ResultSet listaCoberturas = ps.executeQuery()){
+
+            while (listaCoberturas.next()){
+
+                int numero_cliente = listaCoberturas.getInt("numero_cliente");
+                int codigo_propiedad = listaCoberturas.getInt("codigo_propiedad");
+
+                String tipo = listaCoberturas.getString("tipo");
+                int codigo = listaCoberturas.getInt("codigo");
+                String detalle = listaCoberturas.getString("detalle_cobertura");
+                double precio = listaCoberturas.getDouble("precio");
+
+                Servicio servicio = new Servicio(numero_cliente,codigo_propiedad,codigo,tipo,detalle,precio);
+
+                listaDeCoberturas.add(servicio);
+
+            }
+
+
+        } catch (SQLException e){
+            System.out.println("Ocurrio un error, detalles: " + e.getMessage());
+        }
+        return listaDeCoberturas;
     }
 
 

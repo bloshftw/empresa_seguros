@@ -12,23 +12,30 @@ import com.empresaseguros.utils.Conexion;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
 
-    ServicioDAO serviciobd = new ServicioDAO();
-    Servicio nuevoServicio = new Servicio(6,2,"Cobertura contra accidentes","Para vehiculos",250000);
+        ClienteDAO clienteBD = new ClienteDAO();
+        PropiedadDAO propiedadBD = new PropiedadDAO();
+        ServicioDAO servicioBD = new ServicioDAO();
 
 
+        List<Servicio> listaDeServicios = servicioBD.obtenerCoberturas();
 
-       boolean exito = serviciobd.insertarServicio(nuevoServicio);
+        for (Servicio s : listaDeServicios) {
+            System.out.println(s.toString());
 
-    if (exito){
-        System.out.println("Se inserto el servicio correctamente");
-    } else {
-        System.out.println("El servicio no pudo ser insertado, verifique cliente y propiedad.");
-    }
+            System.out.println("Detalles del cliente: \n" );
+            Cliente c = clienteBD.buscarCliente(s.getNumero_cliente());
+            System.out.println(c.toString());
 
+
+            System.out.println("---Aca se separan los servicios y clientes---");
+
+        }
 
     }
 }

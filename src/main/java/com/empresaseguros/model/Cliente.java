@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 public class Cliente {
 
+    private int numero_cliente;
     private String nombre;
     private String apellido;
     private String dni;
@@ -22,6 +23,28 @@ public class Cliente {
     //Constructor Vacio
     public Cliente() {
     };
+
+    //Constructor para extrae cliente de la base de datos
+
+    public Cliente(int numero_cliente, String nombre, String apellido, String dni, LocalDate fecha_nacimiento, double sueldo) {
+        this.numero_cliente = numero_cliente;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.dni = dni;
+        this.fecha_nacimiento = fecha_nacimiento;
+        this.sueldo = sueldo;
+    }
+
+    //Constructor para mostrar en conjunto con el servicio
+
+    public Cliente(int numero_cliente, String nombre, String apellido, String dni){
+
+        this.numero_cliente = numero_cliente;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.dni = dni;
+
+    }
 
     //Getters and setter
 
@@ -64,6 +87,14 @@ public class Cliente {
 
     public void setSueldo(double sueldo) {
         this.sueldo = sueldo;
+    }
+
+    public int getNumero_cliente() {
+        return numero_cliente;
+    }
+
+    public void setNumero_cliente(int numero_cliente) {
+        this.numero_cliente = numero_cliente;
     }
 
 

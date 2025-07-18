@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PropiedadDAO {
 
@@ -53,6 +55,47 @@ public class PropiedadDAO {
             System.out.println("Hubo un error al consultar la existencia de la propiedad, detalles: " + e.getMessage());
             return false;
         }
+    }
+
+    public List<Propiedad> obtenerTodasLasPropiedades () {
+
+        //Creamos la lista que contendra todas las propiedades
+        List<Propiedad> listaPropiedades = new ArrayList<>();
+
+        //Sentencia SQL
+        String sql = "SELECT * FROM propiedades";
+
+        try(Connection conexion = Conexion.getConnection();
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ResultSet datosPropiedades = ps.executeQuery()){
+
+            while (datosPropiedades.next()){
+
+                int codigoPropiedad = datosPropiedades.getInt("codigo_propiedad");
+                String direccion = datosPropiedades.getString("direccion");
+                double metrosCuadrados = datosPropiedades.getDouble("metros_cuadrados");
+                double valorMercado = datosPropiedades.getDouble("valor_mercado");
+                String zona = datosPropiedades.getString("zona");
+
+                //Creamos el objeto propiedad y lo agregamos a la lista
+
+                Propiedad propiedad = new Propiedad(codigoPropiedad,direccion,metrosCuadrados,valorMercado,zona);
+
+                listaPropiedades.add(propiedad);
+            }
+
+        } catch (SQLException e){
+            System.out.println("Hubo un error: " + e.getMessage());
+        }
+
+        if (listaPropiedades.size() > 0){
+
+        } else if (listaPropiedades.size() == 0){
+            System.out.println("No existen propiedades en la base de datos.");
+
+        }
+
+        return listaPropiedades;
     }
 
 
